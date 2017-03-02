@@ -1,0 +1,21 @@
+{
+	"autoload":{
+		"psr-4":{
+			"Frameworks\\LipariStudios\\PHP\\": "../../framework/liparistudios/PHP/",
+			"Frameworks\\LipariStudios\\Socket\\": "../../framework/liparistudios/Socket/",
+			"Frameworks\\LipariStudios\\Exception\\": "../../framework/liparistudios/Exception/",
+			"Model\\": "model/"
+		}
+	},
+	"authors": [
+		{
+			"name": "Vito Lipari",
+			"email": "vitolipari81@gmail.com",
+			"role": "Developer"
+		},
+		{
+			"name": "LipariStudios",
+			"role": "Admin"
+		}
+	]
+}
