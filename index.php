@@ -47,6 +47,6 @@
 
 
 
-		<script type="text/javascript" src="../../framework/liparistudios/PHP/AllPack.php?lib=base"></script>
+		<script type="text/javascript" src="../../framework/liparistudios/PHP/jsPack.php?mode=dev"></script>
 	</body>
 </html>
