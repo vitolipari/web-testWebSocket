@@ -1,10 +1,7 @@
 {
 	"autoload":{
 		"psr-4":{
-			"Frameworks\\LipariStudios\\PHP\\": "../../framework/liparistudios/PHP/",
-			"Frameworks\\LipariStudios\\Socket\\": "../../framework/liparistudios/Socket/",
-			"Frameworks\\LipariStudios\\Exception\\": "../../framework/liparistudios/Exception/",
-			"Model\\": "model/"
+			"Frameworks\\LipariStudios\\PHP\\": "../../framework/liparistudios/PHP/"
 		}
 	},
 	"authors": [
