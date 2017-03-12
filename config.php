@@ -1,6 +1,6 @@
 <?php
 
-// dev
+// prod
 
 define('DB_TYPE',       'mysql');
 define('DB_HOST',       'localhost');
