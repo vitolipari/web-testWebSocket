@@ -1,7 +1,8 @@
 {
 	"autoload":{
 		"psr-4":{
-			"Frameworks\\LipariStudios\\PHP\\": "../../framework/liparistudios/PHP/"
+			"Frameworks\\LipariStudios\\PHP\\": "../../framework/liparistudios/PHP/",
+		  	"Frameworks\\LipariStudios\\Socket\\": "../../framework/liparistudios/Socket/"
 		}
 	},
 	"authors": [
