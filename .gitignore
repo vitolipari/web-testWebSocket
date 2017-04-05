@@ -14,4 +14,6 @@ Icon?
 # this project
 .idea
 .idea/*
+.idea/*.iml
+.idea/*.xml
 caseStudy
