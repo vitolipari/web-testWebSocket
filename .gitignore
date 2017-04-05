@@ -1,0 +1,17 @@
+# python
+*.pyc
+__pycache__
+__init__.py
+
+# Mac
+Icon?
+!Icons
+!Icon*.png
+!Icon*.icn
+!Icon*.jpg
+.DS_Store
+
+# this project
+.idea
+.idea/*
+caseStudy
