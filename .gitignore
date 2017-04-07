@@ -1,5 +1,8 @@
 # this project
 .idea
+/.idea/*
+/.idea/
+/.idea
 .idea/
 .idea/*
 .idea/*.iml
@@ -83,3 +86,8 @@ modules.xml
 .idea/sonarlint
 
 # End of https://www.gitignore.io/api/phpstorm
+
+
+# preso da http://stackoverflow.com/questions/25748132/what-to-include-in-gitignore-for-a-laravel-and-phpstorm-project
+Thumbs.db
+composer.phar
