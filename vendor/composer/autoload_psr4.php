@@ -6,5 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Frameworks\\LipariStudios\\Socket\\' => array($baseDir . '/../../framework/liparistudios/Socket'),
     'Frameworks\\LipariStudios\\PHP\\' => array($baseDir . '/../../framework/liparistudios/PHP'),
 );

@@ -1,3 +1,11 @@
+# this project
+.idea
+.idea/
+.idea/*
+.idea/*.iml
+.idea/*.xml
+caseStudy
+
 # python
 *.pyc
 __pycache__
@@ -11,9 +19,3 @@ Icon?
 !Icon*.jpg
 .DS_Store
 
-# this project
-.idea
-.idea/*
-.idea/*.iml
-.idea/*.xml
-caseStudy

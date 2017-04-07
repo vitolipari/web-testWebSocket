@@ -9,11 +9,16 @@ class ComposerStaticInit2bb26ea1ab173ec662af3cf27691ef37
     public static $prefixLengthsPsr4 = array (
         'F' => 
         array (
+            'Frameworks\\LipariStudios\\Socket\\' => 32,
             'Frameworks\\LipariStudios\\PHP\\' => 29,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Frameworks\\LipariStudios\\Socket\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/../../framework/liparistudios/Socket',
+        ),
         'Frameworks\\LipariStudios\\PHP\\' => 
         array (
             0 => __DIR__ . '/../..' . '/../../framework/liparistudios/PHP',
