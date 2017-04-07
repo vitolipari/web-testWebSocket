@@ -1,0 +1,23 @@
+{
+  "info":{
+	"version": 1.0,
+	"modified": "2017-04-07",
+	"dateFormat": "yyyy-mm-dd",
+	"author":{
+	  "name": "Vito Lipari",
+	  "company": "LipariStudios",
+	  "mail": "vitolipari81@gmail.com"
+	}
+  },
+  "throwable":{
+	"WEBSOCKET_ERROR": {
+	  "code": 100,
+	  "msg": "Errore websocket"
+	}
+  },
+  "socket" : {
+	"host" : "localhost",
+	"port" : 1599,
+	"socketPath": "/LipariStudios/App/TestWebSocket"
+  }
+}

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>WebSocket - client</title>
+
+
+	<script type="text/javascript" src="../../framework/liparistudios/js/XHR.js"></script>
+	<script type="text/javascript" src="../../framework/liparistudios/js/DOM.js"></script>
+	<!--<script type="text/javascript" src="config.json"></script>-->
+	<script type="text/javascript">
+
+
+
+		window.addEventListener('load', init, false);
+
+		var conf;
+		var con;
+
+		function init(){
+
+			Ajax.play({where: 'config.json'}, start);
+
+
+
+		}
+
+		/**
+		 *
+		 * */
+		var consoleLog = function(args){
+
+			if( arguments.length == 1 ) console.log(args);
+			else                        console.log.apply(console, arguments);
+
+				if($('logs')){
+
+					if( arguments.length > 1 ){
+						var logText = '['+ (new Date()).getTime() +'] ';
+						var part = arguments[0].split('%c');
+						for( var i in part ){
+							if( part[i].trim().length > 0 ){
+								logText += '<span style="color:#000; '+ arguments[i] +'">' + part[i] + '</span>';
+							}
+						}
+
+						$('logs').innerHTML += logText + '<br>';
+					}
+					else{
+						if( typeof(arguments[0]) == 'string'  ) $('logs').innerHTML += '['+ (new Date()).getTime() +'] ' + arguments[0] + '<br>';
+						if( typeof(arguments[0]) == 'object'  ) $('logs').innerHTML += '['+ (new Date()).getTime() +'] ' + JSON.stringify(arguments[0]) + '<br>';
+					}
+					$('logs').scrollTop = $('logs').scrollHeight;
+
+				}
+
+
+		};
+
+
+		function start(confString){
+
+
+			// configurazione
+			conf = JSON.parse(confString);
+			console.log('Arriva questo melon: '+ conf);
+
+
+
+			// creazione websocket
+			try {
+
+				consoleLog('instanzio la websocket');
+
+				con = new WebSocket("ws://" + conf.socket.host + ":" + conf.socket.port + conf.socket.socketPath);
+
+				consoleLog(con);
+
+				con.onopen = function (evt) {
+					consoleLog(evt);
+//					ready();
+				};
+
+				con.onclose = function (evt) {
+					// consoleLog(evt);
+					consoleLog('%cWebSocket Chiusa!', 'color:#f00; background:rgba(0,0,0,1); padding-left:20px; padding-right:20px;');
+//					AlertPanel.show('WebSocket Chiusa!', AlertPanel.ATTENTION);
+
+//					setTimeout(function(){
+//						AlertPanel.suicide();
+//						Ampolla.suicide();
+//						App.goto(App.HOME_VIEW);
+//					}, 1000);
+
+				};
+
+				con.onmessage = function (evt) {
+					consoleLog(evt);
+					var msg = JSON.parse( evt.data );
+
+					if( typeof(msg.map) != 'undefined' && msg.map != null ){
+						// if( status == LIST ) userListUpdate(msg.map);
+						if( status != PANEL_ONLINE && status != PANEL_OFFLINE ) userListUpdate(msg.map);
+					}
+//					else incomingMessage(msg);
+
+				};
+
+				con.onerror = function (evt) {
+//					console.log('ATTENZIONE!!!!');
+//					console.log('conf: '+ JSON.stringify(conf));
+//					consoleLog('%cErrore %c'+ JSON.stringify(evt), 'color:#fff; background:#d00; font-weight:bold;', 'color:#fff; background:#f00; font-weight:normal;');
+//					throw conf.throwable.WEBSOCKET_ERROR;	//	non può funzionare
+					onError(conf.throwable.WEBSOCKET_ERROR);
+				};
+
+			}
+			catch( err ){
+//				console.log('>> dentro il catch');
+				onError( err );
+			}
+
+
+
+		}
+
+
+		function onError( e ){
+//			console.log('Arriva un throw');
+			if( typeof e == 'object' ) consoleLog('%cErrore %c['+ e.code +'] '+ e.msg, 'color:#fff; background:#d00; font-weight:bold;', 'color:#fff; background:#f00; font-weight:normal;')
+			else if( typeof e == 'string' ) consoleLog('%cErrore %c'+ e, 'color:#fff; background:#d00; font-weight:bold;', 'color:#fff; background:#f00; font-weight:normal;')
+			else consoleLog('Arriva '+ e.valueOf());
+		}
+
+	</script>
+
+
+</head>
+<body>
+
+	<div id="logs"></div>
+
+
+</body>
+</html>

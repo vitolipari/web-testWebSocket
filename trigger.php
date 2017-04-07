@@ -13,10 +13,10 @@
 
 error_reporting(E_ALL);
 
-
+use \Frameworks\LipariStudios\Socket\ServerSocket;
 
 echo 'start' .chr(10);
-require_once dirname(__FILE__) . '/../../../../LipariStudios/framework/liparistudios/core/Socket/ServerSocket.php';
+//require_once dirname(__FILE__) . '/../../../../LipariStudios/framework/liparistudios/core/Socket/ServerSocket.php';
 
 
 require_once 'ChatManager.php';
