@@ -57,20 +57,23 @@ function start(confString){
 
 		// configurazione
 		conf = JSON.parse(confString);
-		console.log('Arriva questa configurazione: '+ conf.valueOf());
+		console.log('Arriva questa configurazione: ' + conf.valueOf());
 		console.log('instanzio la websocket');
 
 		// socket = new WebSocketHandler('ws://localhost:1599/LipariStudios/App/TestWebSocket/App.php');
 		socket = new WSHandler({
-			host : 'localhost',
+			host: 'localhost',
 			port: 1599,
 			path: 'LipariStudios/App/TestWebSocket/App.php',
-			onOpen : socketOpen,
-			onClose : socketClose,
+			onOpen: socketOpen,
+			onClose: socketClose,
 			onError: appOnError
 		});
 		console.log('play');
 		socket.play();
+
+	}
+	catch(err){
 		appOnError( err );
 	}
 
@@ -82,7 +85,7 @@ function socketClose( e ){
 	result = '';
 	// console.log(e.code);
 	// console.log('socket close app function: '+ e +' '+ e.valueOf() +' '+ JSON.stringify(e) +' \n\n\n'+ JSONstringfy(e) );
-	console.log('%c[App]%c connessione chiusa,%c ['+ e.code +'] '+ e.msg, 'font-weight:bold; color:#fff; background:#00d;', 'color:#00d;', 'backgound:#ccc;');
+	console.log('%cconnessione chiusa,%c ['+ e.code +'] %c'+ e.msg, 'font-weight:bold; color:#fff; background:#358;', 'color:#358;', 'backgound:#ccc;');
 }
 
 
@@ -94,9 +97,9 @@ function socketOpen( e ){
 
 function appOnError( e ){
 //			console.log('Arriva un throw');
-	if( typeof e == 'object' ) consoleLog('%cApp Errore %c['+ e.code +'] '+ e.msg, 'color:#fff; background:#d00; font-weight:bold;', 'color:#fff; background:#f00; font-weight:normal;')
-	else if( typeof e == 'string' ) consoleLog('%cApp Errore %c'+ e, 'color:#fff; background:#d00; font-weight:bold;', 'color:#fff; background:#f00; font-weight:normal;');
-	else consoleLog('App Errore '+ e.valueOf());
+	if( typeof e == 'object' ) consoleLog('%cErrore %c['+ e.code +'] '+ e.msg, 'color:#fff; background:#d00; font-weight:bold;', 'color:#fff; background:#f00; font-weight:normal;')
+	else if( typeof e == 'string' ) consoleLog('%cErrore %c'+ e, 'color:#fff; background:#d00; font-weight:bold;', 'color:#fff; background:#f00; font-weight:normal;');
+	else consoleLog('Errore '+ e.valueOf());
 
 
 	// console.log('eventPhase: '+ e.eventPhase);
