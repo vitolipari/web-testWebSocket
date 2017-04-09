@@ -1,5 +1,10 @@
 /**
- * Created by vitolipari on 4/8/17.
+ * @author:	LipariStudios
+ * @mail: vitolipari81@gmail.com
+ * @modified: 2017.04.09
+ * @version: 1.2
+ * @github:	https://github.com/vitolipari/web-testWebSocket
+ *
  */
 
 /**
@@ -81,7 +86,52 @@ var WSHandler = function(setObj) {
 
 /**
  *
+ * viene inizializzato il wrapper ( o l'handler )
+ * in ingresso viene accettato o una stringa valida che
+ * rappresenti l'url della socket sul lato server
+ * o un oggetto parametrizzato come descritto nel parametro
+ *
+ *
  * @param setObj
+ * 		- String
+ * 			indica l'url della socket nel seguente formato
+ * 				ws://<host>:<port>/<path>
+ * 				host: un nome host valido ( myserver.com, 192.168.1.101, ecc.. )
+ * 				port: un numero intero compreso nel range 1025 - 999999
+ * 				path: il path dove viene gestita la websocket
+ *
+ * 			es.:
+ * 				"ws://url-123_abc.def.dom:123456/path/for/socket"
+ *
+ * 		- JsonObject
+ * 			un oggetto json che includa i parametri necessari,
+ * 			composto nel seguente formato
+ * 				{
+ * 					"host" 		: <String>,		//	obbligatorio
+ * 					"port" 		: <int>,		//	obbligatorio
+ * 					"path" 		: <String>,		//	obbligatorio
+ * 					"id" 		: <String>,
+ * 					"onOpen" 	: <function>,
+ *				 	"onClose" 	: <function>,
+ *				 	"onMessage" : <function>,
+ *				 	"onError" 	: <function>,
+ *				 	"send" 		: <function>,
+ *				 	"onSent" 	: <function>
+ * 				}
+ *
+ * 			parametri
+ * 				host 		: 	host ( server )
+ * 				port 		: 	porta di connessione alla socket
+ * 				path 		: 	percorso per la gestione della socket
+ * 				id 			: 	identificativo della websocket
+ * 				onOpen 		: 	callBack chiamata dopo l'apertura della connessione,
+ * 								avviene dopo che l'handshake e andato a buon fine
+ *				onClose 	: 	callBack chiamata dopo la chiusura della connessione
+ *				onMessage 	: 	callBack chiamata dopo la ricezione di dati dal server
+ *				onError 	: 	callBack chiamata dopo che si e verificato un errore
+ *				send 		: 	invio di dati invocato da una chiamata esterna
+ *								( dall'app che sta usando questo wrapper/handler )
+ *				onSent	 	: 	callBack chiamata dopo l'invio al server di dati
  */
 WSHandler.prototype.init = function(setObj){
 
@@ -93,7 +143,7 @@ WSHandler.prototype.init = function(setObj){
 	if( typeof setObj == 'string' && setObj.length > 10 ){
 		var pathExcludePattern = /^ws:\/\/[a-zA-Z0-9._-]+:[0-9]{1,6}\//g;
 		if( setObj.match(pathExcludePattern) != 'undefined' && setObj.match(pathExcludePattern) != null ){
-			var portPattern = /:[0-9]{1,6}/g;
+			var portPattern = /:[0-9]{2,6}/g;
 			wrapper.host 		= setObj.substring( 'ws://'.length, setObj.indexOf(setObj.match(portPattern)) );
 			wrapper.port 		= parseInt( setObj.match(portPattern).toString().substr(1), 10);
 			wrapper.serverPath = '/' + setObj.substr( (setObj.match(pathExcludePattern)).toString().length );
@@ -113,6 +163,8 @@ WSHandler.prototype.init = function(setObj){
 		wrapper.onCloseCallback	=	setObj.onClose		||	null;
 		wrapper.onMsgCallback		=	setObj.onMessage	||	null;
 		wrapper.onErrCallback		=	setObj.onError		||	null;
+		wrapper.onSentCallback		=	setObj.onSent		||	null;
+		wrapper.beforeSend		=	setObj.send		||	null;
 
 
 		console.log('imposto websocket chiusa, la callback esterna ('+ (typeof wrapper.onCloseCallback) +')');
@@ -165,6 +217,26 @@ WSHandler.prototype.play = function(setObj){
 
 };
 
+
+/**
+ *
+ * @param data
+ */
+WSHandler.prototype.beforeSend = function( data ){
+
+
+
+
+};
+
+
+/**
+ *
+ * @param e
+ */
+WSHandler.prototype.onSent = function( e ){
+
+};
 
 WSHandler.prototype.handShaked = function( e ){
 	console.log('%c[WebSocket]%c connessione aperta,%c '+ e.valueOf(), 'font-weight:bold; color:#000; background:#0f0;', 'color:#0d0;', 'backgound:#ccc;');
