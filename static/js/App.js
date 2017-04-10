@@ -17,8 +17,14 @@ function init(){
 }
 
 /**
+ * Scive sia in nella console che dentro un
+ * div con id logs<br>
+ * I testi inseriti faranno scorrere i log in alto
+ * come una console bash
  *
- * */
+ *
+ * @param args
+ */
 var consoleLog = function(args){
 
 	if( arguments.length == 1 ) console.log(args);
@@ -49,28 +55,93 @@ var consoleLog = function(args){
 
 };
 
-
+/**
+ *
+ * @param confString
+ */
 function start(confString){
 
 
 	try {
+
+
+		/*
+		 *
+		 */
+		window.onbeforeunload = function(){
+			if(typeof(socket.con) != 'undefined'){
+				// socket.con.onclose = function(){}; // disabilito la chiamata
+				socket.close();
+			}
+		};
+
+
+
 
 		// configurazione
 		conf = JSON.parse(confString);
 		console.log('Arriva questa configurazione: ' + conf.valueOf());
 		console.log('instanzio la websocket');
 
-		// socket = new WebSocketHandler('ws://localhost:1599/LipariStudios/App/TestWebSocket/App.php');
-		socket = new WSHandler({
-			host: 'localhost',
-			port: 1599,
-			path: 'LipariStudios/App/TestWebSocket/App.php',
-			onOpen: socketOpen,
-			onClose: socketClose,
-			onError: appOnError
+
+
+		//####################################################################
+		//////////////////////////////////////////////////////////////////////
+		//[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
+		//--------------------------------------------------------------------
+		//====================================================================
+		// 			GUARDAMI ATTENZIONE IMPORTANTE incompleto, lasciato a meta
+		//====================================================================
+		//--------------------------------------------------------------------
+		//]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+		//////////////////////////////////////////////////////////////////////
+		//####################################################################
+
+
+
+		// get The Remote IP
+		Ajax.play({
+			par:{act:'getTheRemoteIP'},
+			where : conf.eventServer
+		},function(melonString){
+			var melon = JSON.parse(melonString);
+
+			conf.chatManagerServer = melon.servername;
+
+			consoleLog('Trigger a ' + conf.chatManagerServer + conf.pathToChatServer + conf.chatSocket);
+
+			// IMPORTANTE trigger
+			// Ajax.play({where : 'http://' + conf.chatManagerServer + conf.pathToChatServer + conf.chatSocket});
+			Ajax.play({where : conf.baseURL + conf.chatSocket});
+
+
+
+
+			socket = new WSHandler({
+				server : {
+					host: 'localhost',
+					port: 1599,
+					path: 'LipariStudios/App/TestWebSocket/App.php'
+				},
+				callback : {
+					onOpen: socketOpen,
+					onClose: socketClose,
+					onError: appOnError
+				},
+				trigger : true
+			});
+			console.log('play');
+
+			// sicuramente non serve !
+			Ajax.req.abort();
+
+			socket.play();
+
+			// this.init( setObj );
 		});
-		console.log('play');
-		socket.play();
+
+
+
 
 	}
 	catch(err){
@@ -81,6 +152,11 @@ function start(confString){
 
 }
 
+
+/**
+ *
+ * @param e
+ */
 function socketClose( e ){
 	result = '';
 	// console.log(e.code);
@@ -89,12 +165,20 @@ function socketClose( e ){
 }
 
 
+/**
+ *
+ * @param e
+ */
 function socketOpen( e ){
 	result = '';
 	console.log('socket open app function: '+ e +' '+ e.valueOf() +' '+ JSON.stringify(e) +' '+ JSONstringfy(e) );
 }
 
 
+/**
+ *
+ * @param e
+ */
 function appOnError( e ){
 //			console.log('Arriva un throw');
 	if( typeof e == 'object' ) consoleLog('%cErrore %c['+ e.code +'] '+ e.msg, 'color:#fff; background:#d00; font-weight:bold;', 'color:#fff; background:#f00; font-weight:normal;')
