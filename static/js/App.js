@@ -85,36 +85,16 @@ function start(confString){
 
 
 
-		//####################################################################
-		//////////////////////////////////////////////////////////////////////
-		//[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
-		//--------------------------------------------------------------------
-		//====================================================================
-		// 			GUARDAMI ATTENZIONE IMPORTANTE incompleto, lasciato a meta
-		//====================================================================
-		//--------------------------------------------------------------------
-		//]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
-		//////////////////////////////////////////////////////////////////////
-		//####################################################################
-
-
-
 		// get The Remote IP
 		Ajax.play({
 			par:{act:'getTheRemoteIP'},
-			where : conf.eventServer
+			where : conf.eventServer	//	ATTENZIONE
 		},function(melonString){
 			var melon = JSON.parse(melonString);
 
 			conf.chatManagerServer = melon.servername;
 
 			consoleLog('Trigger a ' + conf.chatManagerServer + conf.pathToChatServer + conf.chatSocket);
-
-			// IMPORTANTE trigger
-			// Ajax.play({where : 'http://' + conf.chatManagerServer + conf.pathToChatServer + conf.chatSocket});
-			// Ajax.play({where : conf.baseURL + conf.chatSocket});
-
-
 
 
 			socket = new WSHandler({
