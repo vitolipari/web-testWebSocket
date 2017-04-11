@@ -112,7 +112,7 @@ function start(confString){
 
 			// IMPORTANTE trigger
 			// Ajax.play({where : 'http://' + conf.chatManagerServer + conf.pathToChatServer + conf.chatSocket});
-			Ajax.play({where : conf.baseURL + conf.chatSocket});
+			// Ajax.play({where : conf.baseURL + conf.chatSocket});
 
 
 
@@ -133,7 +133,7 @@ function start(confString){
 			console.log('play');
 
 			// sicuramente non serve !
-			Ajax.req.abort();
+			// Ajax.req.abort();
 
 			socket.play();
 
