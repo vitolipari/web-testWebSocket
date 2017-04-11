@@ -84,7 +84,6 @@ function start(confString){
 		console.log('instanzio la websocket');
 
 
-
 		// get The Remote IP
 		Ajax.play({
 			par:{act:'getTheRemoteIP'},
