@@ -87,7 +87,7 @@ function start(confString){
 		// get The Remote IP
 		Ajax.play({
 			par:{act:'getTheRemoteIP'},
-			where : conf.eventServer	//	ATTENZIONE
+			where : conf.serverUrl + 'controller.php'	//	ATTENZIONE
 		},function(melonString){
 			var melon = JSON.parse(melonString);
 

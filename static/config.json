@@ -15,6 +15,9 @@
 	  "msg": "Errore websocket"
 	}
   },
+  "system":{
+	"serverUrl" : "http://localhost/LipariStudios/App/TestWebSocket/"
+  },
   "socket" : {
 	"host" : "localhost",
 	"port" : 1599,
