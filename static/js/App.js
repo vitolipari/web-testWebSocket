@@ -86,9 +86,14 @@ function start(confString){
 
 		// get The Remote IP
 		Ajax.play({
-			par:{act:'getTheRemoteIP'},
-			where : conf.serverUrl + 'controller.php'	//	ATTENZIONE
+			par: {act: 'getRemoteInfo'},
+			where: conf.system.serverUrl + 'controller.php'	//	ATTENZIONE
 		},function(melonString){
+
+
+			consoleLog(melonString);
+
+
 			var melon = JSON.parse(melonString);
 
 			conf.chatManagerServer = melon.servername;

@@ -10,17 +10,39 @@
 
 
 error_reporting(E_ALL);
-header('Access-Control-Allow-Origin: *');
+//header('Access-Control-Allow-Origin: *');
 
 $act    = $_POST['act'];
 $moment = $_SERVER['REQUEST_TIME'];
+
+
+test();
+
 
 require_once 'config.php';
 
 
 
 // in arrivo =================================================
-if( $act == 'getRemoteInfos' ) getRemoteInfo();
+//if( $act == 'getRemoteInfo' ) getRemoteInfo();
+
+
+function test()
+{
+	$melon = json_encode(array(
+		'ip' => gethostbyname(gethostname()),
+		'servername' => $_SERVER['SERVER_NAME'],
+		'host' => $_SERVER['HTTP_HOST'],
+		'hostname' => gethostname(),
+		'origin' => $_SERVER['HTTP_ORIGIN'],
+//		'post'			=> $_POST,
+//		'get'			=> $_GET,
+//		'server'		=> $_SERVER
+	));
+	header('Content-Type: application/json');
+	echo $melon;
+//	return null;
+}
 
 
 /**
@@ -41,6 +63,6 @@ function getRemoteInfo(){
 	));
 	header('Content-Type: application/json');
 	echo $melon;
-	return null;
+//	return null;
 
 }
