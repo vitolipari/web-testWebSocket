@@ -5,7 +5,7 @@
 
 
 
-var conf;
+var environment;
 var socket;
 
 function init(){
@@ -79,15 +79,15 @@ function start(confString){
 
 
 		// configurazione
-		conf = JSON.parse(confString);
-		console.log('Arriva questa configurazione: ' + conf.valueOf());
+		environment = JSON.parse(confString);
+		console.log('Arriva questa configurazione: ' + environment.valueOf());
 		console.log('instanzio la websocket');
 
 
 		// get The Remote IP
 		Ajax.play({
 			par: {act: 'getRemoteInfo'},
-			where: conf.system.serverUrl + 'controller.php'	//	ATTENZIONE
+			where: environment.server.url + 'controller.php'	//	ATTENZIONE
 		},function(melonString){
 
 
@@ -96,16 +96,16 @@ function start(confString){
 
 			var melon = JSON.parse(melonString);
 
-			conf.chatManagerServer = melon.servername;
 
-			consoleLog('Trigger a ' + conf.chatManagerServer + conf.pathToChatServer + conf.chatSocket);
+			// consoleLog('Trigger a ' + environment.chatManagerServer + environment.pathToChatServer + environment.chatSocket);
+			consoleLog(melon);
 
 
 			socket = new WSHandler({
 				server : {
-					host: 'localhost',
-					port: 1599,
-					path: 'LipariStudios/App/TestWebSocket/App.php'
+					host: environment.socket.host,
+					port: environment.socket.port,
+					path: environment.socket.path
 				},
 				callback : {
 					onOpen: socketOpen,

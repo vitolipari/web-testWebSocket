@@ -15,12 +15,15 @@
 	  "msg": "Errore websocket"
 	}
   },
-  "system":{
-	"serverUrl" : "http://localhost/LipariStudios/App/TestWebSocket/"
+  "server": {
+	"url": "http://localhost/LipariStudios/App/TestWebSocket/"
   },
   "socket" : {
 	"host" : "localhost",
 	"port" : 1599,
-	"socketPath": "/LipariStudios/App/TestWebSocket"
+	"path": "/LipariStudios/App/TestWebSocket/App.php"
+  },
+  "manager": {
+	"path": "manager/AllWebSocketConnectedHost.php"
   }
 }
