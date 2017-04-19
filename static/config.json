@@ -21,7 +21,8 @@
   "socket" : {
 	"host" : "localhost",
 	"port" : 1599,
-	"path": "/LipariStudios/App/TestWebSocket/App.php"
+	"path" : "/LipariStudios/App/TestWebSocket/App.php",
+	"bootscript" : "http://localhost/LipariStudios/App/TestWebSocket/App.php"
   },
   "manager": {
 	"path": "manager/AllWebSocketConnectedHost.php"

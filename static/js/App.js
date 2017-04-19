@@ -101,6 +101,7 @@ function start(confString){
 			consoleLog(melon);
 
 
+			consoleLog('Instanzio il wrapper/handler');
 			socket = new WSHandler({
 				server : {
 					host: environment.socket.host,
@@ -112,13 +113,13 @@ function start(confString){
 					onClose: socketClose,
 					onError: appOnError
 				},
-				trigger : true
+				trigger : environment.socket.bootscript
 			});
+
+
+
+
 			console.log('play');
-
-			// sicuramente non serve !
-			// Ajax.req.abort();
-
 			socket.play();
 
 			// this.init( setObj );

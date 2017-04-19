@@ -2,6 +2,6 @@
 
 
 // provvisorio
-header("Location: ../static");
+header("Location: static");
 
 ?>
